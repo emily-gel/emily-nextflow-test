@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+nextflow.enable.dsl=2
+
 params.greeting  = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
