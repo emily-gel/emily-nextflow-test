@@ -22,6 +22,6 @@ process COWSAY {
 
     script:
     """
-    cowsay $y.text
+    docker run docker/whalesay cowsay $y.text
     """
 }
