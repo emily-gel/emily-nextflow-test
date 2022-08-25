@@ -22,6 +22,6 @@ process COWSAY {
 
     script:
     """
-    echo $y.text
+    cowsay $y.text
     """
 }
