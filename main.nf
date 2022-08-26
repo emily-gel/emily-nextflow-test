@@ -1,14 +1,32 @@
 #!/usr/bin/env nextflow
 
-nextflow.preview.dsl=2
-
 params.greeting  = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
 include { SPLITLETTERS ; COWSAY } from './hello_processes.nf'
 
-workflow{
-    letters_ch = SPLITLETTERS(greeting_ch)
-    results_ch = COWSAY(letters_ch.flatten())
-    results_ch.view{ it }
+process SPLITLETTERS {
+    input:
+    val x from greeting_ch
+
+    output:
+    file 'chunk_*' into letters_ch
+
+    script:
+    """
+    printf '$x' | split -b 6 - chunk_
+    """
+}
+
+process COWSAY {
+    input:
+    val y from letters_ch.flatten()
+
+    output:
+    file 'cow_*'
+
+    script:
+    """
+    cowsay $y.text
+    """
 }
