@@ -3,8 +3,6 @@
 params.greeting  = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
-include { SPLITLETTERS ; COWSAY } from './hello_processes.nf'
-
 process SPLITLETTERS {
     input:
     val x from greeting_ch
