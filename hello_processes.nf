@@ -18,7 +18,7 @@ process COWSAY {
     val y
 
     output:
-    file 'cow_*'
+    stdout
 
     script:
     """
