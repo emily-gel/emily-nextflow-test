@@ -12,16 +12,3 @@ process SPLITLETTERS {
     printf '$x' | split -b 6 - chunk_
     """
 }
-
-process COWSAY {
-    input:
-    val y
-
-    output:
-    stdout
-
-    script:
-    """
-    cowsay $y.text
-    """
-}
